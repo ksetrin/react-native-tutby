@@ -5,13 +5,11 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
-  SectionList, // replace to section and remap by dates
-  Image,
+  SectionList,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import 'moment/locale/ru';
-
 import styles from './FeedScreenStyles';
 
 const FeedScreen = ({newsSection, newsFetchRequestState, onNewsPress}) => {
@@ -20,10 +18,8 @@ const FeedScreen = ({newsSection, newsFetchRequestState, onNewsPress}) => {
     const time = pubDate.format('HH mm');
     const title = item.title[0];
     const img = item.enclosure[0].$.url;
-
     return (
-      // onNewsPress(item)
-      <TouchableOpacity onPress={() => null}>
+      <TouchableOpacity onPress={onNewsPress(item)}>
         <View style={{flexDirection: 'row'}}>
           <View style={{}}>
             <FastImage style={{width: 150, height: 100}} source={{uri: img}} />
@@ -51,6 +47,14 @@ const FeedScreen = ({newsSection, newsFetchRequestState, onNewsPress}) => {
     </View>
   );
 
+  const renderSeparatorComponent = () => <View style={styles.newsSeparator} />;
+
+  const renderHeaderComponent = () => ( // todo
+    <View style={styles.newsSection}>
+      <Text style={styles.newsSectionText}>{'TITLE'}</Text>
+    </View>
+  );
+
   const renderContent = () => (
     <React.Fragment>
       <SectionList
@@ -59,6 +63,8 @@ const FeedScreen = ({newsSection, newsFetchRequestState, onNewsPress}) => {
         renderSectionHeader={renderSectionHeader}
         sections={newsSection}
         keyExtractor={item => item.guid[0]._}
+        ItemSeparatorComponent={renderSeparatorComponent}
+        ListHeaderComponent={renderHeaderComponent}
         // onRefresh
       />
     </React.Fragment>
