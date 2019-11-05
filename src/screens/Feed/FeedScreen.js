@@ -1,51 +1,81 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {newsFetchRequest} from '../../store/actions';
 import {
-  newsListSelector,
-  newsRequestStateSelector,
-} from '../../store/news/selectors';
+  ActivityIndicator,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  SectionList, // replace to section and remap by dates
+  Image,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import moment from 'moment';
+import 'moment/locale/ru';
 
-class FeedScreen extends React.Component {
-  componentDidMount = () => {
-    this.fetchData();
-  };
+import styles from './FeedScreenStyles';
 
-  fetchData = async () => {
-    this.props.newsFetchRequest();
-  };
-
-  render() {
-
-    console.log('+kse this.props.news', this.props.news);
+const FeedScreen = ({newsSection, newsFetchRequestState, onNewsPress}) => {
+  const renderItem = ({item}) => {
+    const pubDate = moment(new Date(item.pubDate));
+    const time = pubDate.format('HH mm');
+    const title = item.title[0];
+    const img = item.enclosure[0].$.url;
 
     return (
-      <View>
-        <Text>feed</Text>
-      </View>
+      // onNewsPress(item)
+      <TouchableOpacity onPress={() => null}>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{}}>
+            <FastImage style={{width: 150, height: 100}} source={{uri: img}} />
+          </View>
+          <View style={{flex: 1, marginLeft: 8}}>
+            <View style={{marginBottom: 8}}>
+              <Text style={styles.timeText}>{time}</Text>
+            </View>
+            <Text style={styles.paymentText}>{title}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
     );
-  }
-}
-
-function mapStateToProps(state, props) {
-  return {
-    news: newsListSelector()(state),
-    newsFetchRequestState: newsRequestStateSelector()(state),
   };
-}
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      newsFetchRequest,
-    },
-    dispatch,
+  const renderSectionHeader = ({section: {title}}) => (
+    <View style={styles.newsSection}>
+      <Text style={styles.newsSectionText}>{title}</Text>
+    </View>
   );
-}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(FeedScreen);
+  const renderError = () => (
+    <View style={styles.centerContainer}>
+      <Text style={styles.red}>{newsFetchRequestState.errorMessage}</Text>
+    </View>
+  );
+
+  const renderContent = () => (
+    <React.Fragment>
+      <SectionList
+        contentContainerStyle={{backgroundColor: '#fff', padding: 8}}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
+        sections={newsSection}
+        keyExtractor={item => item.guid[0]._}
+        // onRefresh
+      />
+    </React.Fragment>
+  );
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {newsFetchRequestState.isLoading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : newsFetchRequestState.isSuccess &&
+        !newsFetchRequestState.errorMessage ? (
+        renderContent()
+      ) : (
+        renderError()
+      )}
+    </SafeAreaView>
+  );
+};
+
+export default FeedScreen;

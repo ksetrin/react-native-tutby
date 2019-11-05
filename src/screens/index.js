@@ -1,1 +1,1 @@
-export {default as FeedScreen} from './Feed/FeedScreen';
+export {default as FeedScreen} from './Feed/FeedScreenContainer';
