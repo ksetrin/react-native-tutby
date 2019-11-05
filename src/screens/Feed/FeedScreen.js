@@ -3,6 +3,10 @@ import {Text, View} from 'react-native';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {newsFetchRequest} from '../../store/actions';
+import {
+  newsListSelector,
+  newsRequestStateSelector,
+} from '../../store/news/selectors';
 
 class FeedScreen extends React.Component {
   componentDidMount = () => {
@@ -14,6 +18,9 @@ class FeedScreen extends React.Component {
   };
 
   render() {
+
+    console.log('+kse this.props.news', this.props.news);
+
     return (
       <View>
         <Text>feed</Text>
@@ -24,7 +31,8 @@ class FeedScreen extends React.Component {
 
 function mapStateToProps(state, props) {
   return {
-    newsFetchRequestState: state.news.newsFetchRequestState,
+    news: newsListSelector()(state),
+    newsFetchRequestState: newsRequestStateSelector()(state),
   };
 }
 
