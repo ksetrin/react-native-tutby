@@ -4,38 +4,40 @@ import {
   REQUEST_STATE_SUCCESS,
 } from '../constants';
 import {
-  NEWS_FETCH_REQUEST_PENDING,
-  NEWS_FETCH_REQUEST_FAILURE,
-  NEWS_FETCH_REQUEST_SUCCESS,
+  RSS_FETCH_REQUEST_PENDING,
+  RSS_FETCH_REQUEST_SUCCESS,
+  RSS_FETCH_REQUEST_FAILURE,
 } from './actions';
 
 export const initialState = {
-  list: [],
-  newsFetchRequestState: {},
+  title: '',
+  image: null,
+  rssFetchRequestState: {},
 };
 
 const mutations = {
-  [NEWS_FETCH_REQUEST_PENDING](state) {
+  [RSS_FETCH_REQUEST_PENDING](state) {
     return {
       ...state,
-      newsFetchRequestState: {
+      rssFetchRequestState: {
         ...REQUEST_STATE_PENDING,
       },
     };
   },
-  [NEWS_FETCH_REQUEST_SUCCESS](state, {list}) {
+  [RSS_FETCH_REQUEST_SUCCESS](state, {title, image}) {
     return {
       ...state,
-      newsFetchRequestState: {
+      rssFetchRequestState: {
         ...REQUEST_STATE_SUCCESS,
       },
-      list,
+      title,
+      image,
     };
   },
-  [NEWS_FETCH_REQUEST_FAILURE](state, {errorMessage}) {
+  [RSS_FETCH_REQUEST_FAILURE](state, {errorMessage}) {
     return {
       ...state,
-      newsFetchRequestState: {
+      rssFetchRequestState: {
         ...REQUEST_STATE_FAILURE,
         errorMessage,
       },

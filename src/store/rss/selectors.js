@@ -1,44 +1,24 @@
 import {createSelector} from 'reselect';
-import moment from 'moment';
 import 'moment/locale/ru';
 
-export const newsSelector = () => state => {
-  return state.news;
+export const rssSelector = () => state => {
+  return state.rss;
 };
 
-export const newsListSelector = () =>
+export const rssTitleSelector = () =>
   createSelector(
-    newsSelector(),
-    news => news.list || [],
+    rssSelector(),
+    rss => rss.title && rss.title.length && rss.title[0],
   );
 
-export const newsSectionListSelector = () =>
+export const rssImageSelector = () =>
   createSelector(
-    newsListSelector(),
-    news => {
-      // console.log('+kse-newsSectionListSelector', news);
-      const sectionNews = [];
-      const section = {
-        title: null,
-        data: [],
-      };
-      for (let i = 0; i < news.length; i++) {
-        const pubDate = moment(new Date(news[i].pubDate)).format('D MMMM');
-        if (section.title !== pubDate) {
-          section.data.length && sectionNews.push({...section});
-          section.title = pubDate;
-          section.data = [news[i]];
-        } else {
-          section.data.push(news[i]);
-        }
-      }
-      sectionNews.push({...section});
-      return sectionNews;
-    },
+    rssSelector(),
+    rss => rss.image && rss.image.length && rss.image[0] && rss.image[0].url,
   );
 
-export const newsRequestStateSelector = () =>
+export const rssRequestStateSelector = () =>
   createSelector(
-    newsSelector(),
-    news => news.newsFetchRequestState || {},
+    rssSelector(),
+    rss => rss.rssFetchRequestState || {},
   );

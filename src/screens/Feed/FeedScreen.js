@@ -12,12 +12,13 @@ import moment from 'moment';
 import 'moment/locale/ru';
 import styles from './FeedScreenStyles';
 
-const FeedScreen = ({newsSection, newsFetchRequestState, onNewsPress}) => {
+const FeedScreen = ({title, newsSection, rssFetchRequestState, onNewsPress}) => {
   const renderItem = ({item}) => {
     const pubDate = moment(new Date(item.pubDate));
     const time = pubDate.format('HH mm');
     const title = item.title[0];
     const img = item.enclosure[0].$.url;
+
     return (
       <TouchableOpacity onPress={onNewsPress(item)}>
         <View style={{flexDirection: 'row'}}>
@@ -43,15 +44,15 @@ const FeedScreen = ({newsSection, newsFetchRequestState, onNewsPress}) => {
 
   const renderError = () => (
     <View style={styles.centerContainer}>
-      <Text style={styles.red}>{newsFetchRequestState.errorMessage}</Text>
+      <Text style={styles.red}>{rssFetchRequestState.errorMessage}</Text>
     </View>
   );
 
   const renderSeparatorComponent = () => <View style={styles.newsSeparator} />;
 
-  const renderHeaderComponent = () => ( // todo
+  const renderHeaderComponent = () => (
     <View style={styles.newsSection}>
-      <Text style={styles.newsSectionText}>{'TITLE'}</Text>
+      <Text style={styles.newsSectionText}>{title}</Text>
     </View>
   );
 
@@ -72,10 +73,10 @@ const FeedScreen = ({newsSection, newsFetchRequestState, onNewsPress}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {newsFetchRequestState.isLoading ? (
+      {rssFetchRequestState.isLoading ? (
         <ActivityIndicator size="large" color="#0000ff" />
-      ) : newsFetchRequestState.isSuccess &&
-        !newsFetchRequestState.errorMessage ? (
+      ) : rssFetchRequestState.isSuccess &&
+        !rssFetchRequestState.errorMessage ? (
         renderContent()
       ) : (
         renderError()
