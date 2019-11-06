@@ -28,7 +28,7 @@ class FeedScreenContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     newsSection: newsSectionListSelector()(state),
     rssFetchRequestState: rssRequestStateSelector()(state),

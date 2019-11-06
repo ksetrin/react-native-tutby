@@ -2,10 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {rssFetchRequest} from '../../store/actions';
-import {
-  newsSectionListSelector,
-  newsRequestStateSelector,
-} from '../../store/news/selectors';
+import {rssRequestStateSelector} from '../../store/rss/selectors';
 import StartScreen from './StartScreen';
 import NetInfo from '@react-native-community/netinfo';
 
@@ -23,9 +20,17 @@ class StartScreenContainer extends React.Component {
       } else {
         await rssFetchRequest();
       }
+      this.checkLoadData();
       navigation.navigate('Feed');
     } catch (e) {
       alert(e.message);
+    }
+  };
+
+  checkLoadData = () => {
+    const {rssFetchRequestState} = this.props;
+    if (rssFetchRequestState.errorMessage) {
+      throw new Error(rssFetchRequestState.errorMessage);
     }
   };
 
@@ -34,10 +39,9 @@ class StartScreenContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
-    newsSection: newsSectionListSelector()(state),
-    newsFetchRequestState: newsRequestStateSelector()(state),
+    rssFetchRequestState: rssRequestStateSelector()(state),
   };
 }
 
