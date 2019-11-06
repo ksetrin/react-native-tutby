@@ -1,9 +1,10 @@
 import {combineReducers, createStore, compose, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {news} from './reducers';
+import {rss, news} from './reducers';
 
 const initialState = {};
 const reducer = combineReducers({
+  rss,
   news,
 });
 
