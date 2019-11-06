@@ -14,7 +14,7 @@ import styles from './FeedScreenStyles';
 
 const FeedScreen = ({
   title,
-  newsSection,
+  rssNewsSectionList,
   rssFetchRequestState,
   onNewsPress,
 }) => {
@@ -67,7 +67,7 @@ const FeedScreen = ({
         contentContainerStyle={{backgroundColor: '#fff', padding: 8}}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
-        sections={newsSection}
+        sections={rssNewsSectionList}
         keyExtractor={item => item.guid[0]._}
         ItemSeparatorComponent={renderSeparatorComponent}
         ListHeaderComponent={renderHeaderComponent}

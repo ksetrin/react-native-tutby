@@ -12,6 +12,7 @@ import {
 export const initialState = {
   title: '',
   image: null,
+  newsList: [],
   rssFetchRequestState: {},
 };
 
@@ -24,7 +25,7 @@ const mutations = {
       },
     };
   },
-  [RSS_FETCH_REQUEST_SUCCESS](state, {title, image}) {
+  [RSS_FETCH_REQUEST_SUCCESS](state, {title, image, newsList}) {
     return {
       ...state,
       rssFetchRequestState: {
@@ -32,6 +33,7 @@ const mutations = {
       },
       title,
       image,
+      newsList,
     };
   },
   [RSS_FETCH_REQUEST_FAILURE](state, {errorMessage}) {
