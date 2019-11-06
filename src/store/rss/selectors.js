@@ -14,7 +14,7 @@ export const rssTitleSelector = () =>
 export const rssImageSelector = () =>
   createSelector(
     rssSelector(),
-    rss => rss.image && rss.image.length && rss.image[0] && rss.image[0].url,
+    rss => rss.image && rss.image.length && rss.image[0] && rss.image[0].url && rss.image[0].url[0],
   );
 
 export const rssRequestStateSelector = () =>

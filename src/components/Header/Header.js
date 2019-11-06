@@ -11,7 +11,7 @@ const Header = ({navigation}) => {
     <View style={styles.container}>
       <Icon
         name="navicon"
-        size={25}
+        size={40}
         color="#999"
         style={styles.navicon}
         onPress={toggleDrawer}

@@ -8,8 +8,8 @@ export const RSS_FETCH_REQUEST_FAILURE = 'rss/fetch/request/failure';
 export const rssFetchRequest = () => async dispatch => {
   dispatch({type: RSS_FETCH_REQUEST_PENDING});
   try {
-    const response = await fetch('https://news.tut.by/rss/sport/football.rss');
-    // const response = await fetch('https://news.tut.by/rss/all.rss');
+    // const response = await fetch('https://news.tut.by/rss/sport/football.rss');
+    const response = await fetch('https://news.tut.by/rss/all.rss');
     const text = await response.text();
 
     const parseString = require('react-native-xml2js').parseString;
@@ -21,7 +21,7 @@ export const rssFetchRequest = () => async dispatch => {
     dispatch({
       type: RSS_FETCH_REQUEST_SUCCESS,
       title: data.title,
-      image: data.description,
+      image: data.image,
     });
 
     dispatch(newsLoadAction(data.item));

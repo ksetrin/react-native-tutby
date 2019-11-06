@@ -12,7 +12,12 @@ import moment from 'moment';
 import 'moment/locale/ru';
 import styles from './FeedScreenStyles';
 
-const FeedScreen = ({title, newsSection, rssFetchRequestState, onNewsPress}) => {
+const FeedScreen = ({
+  title,
+  newsSection,
+  rssFetchRequestState,
+  onNewsPress,
+}) => {
   const renderItem = ({item}) => {
     const pubDate = moment(new Date(item.pubDate));
     const time = pubDate.format('HH mm');
