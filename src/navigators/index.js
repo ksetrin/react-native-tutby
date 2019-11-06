@@ -1,25 +1,14 @@
-import {createDrawerNavigator} from 'react-navigation-drawer';
-import {createAppContainer} from 'react-navigation';
-import FeedStackNavigator from './FeedStackNavigator';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import AppDrawerNavigator from './lib/AppDrawerNavigator';
+import LoginStackNavigator from './lib/LoginStackNavigator';
 
-const RootNavigator = createDrawerNavigator(
+const RootNavigator = createSwitchNavigator(
   {
-    FeedStack: {
-      screen: FeedStackNavigator,
-    },
+    Login: LoginStackNavigator,
+    App: AppDrawerNavigator,
   },
   {
-    drawerWidth: 200,
-    drawerPosition: 'right',
-    contentOptions: {
-      activeTintColor: '#e91e63',
-      itemsContainerStyle: {
-        marginVertical: 0,
-      },
-      iconContainerStyle: {
-        opacity: 1,
-      },
-    },
+    initialRouteName: 'Login',
   },
 );
 
