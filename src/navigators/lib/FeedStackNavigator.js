@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
-import {FeedScreen} from '../screens';
-import Header from '../components/Header';
+import {FeedScreen} from '../../screens';
+import Header from '../../components/Header';
 
 const FeedStackNavigator = createStackNavigator(
   {
@@ -11,16 +11,18 @@ const FeedStackNavigator = createStackNavigator(
   },
   {
     initialRouteName: 'Feed',
-    defaultNavigationOptions: ({ navigation }) => ({
-      //todo move default opt
+    defaultNavigationOptions: ({navigation}) => ({
       headerStyle: {
         elevation: 0,
         shadowOpacity: 0,
         borderBottomWidth: 0,
-        // backgroundColor: '#57B8B6',
       },
       // todo component
       headerRight: <Header navigation={navigation} />,
+      headerRightContainerStyle: {
+        // backgroundColor: 'yellow',
+        // flex: 1,
+      },
       cardOverlayEnabled: true,
       headerMode: 'screen',
     }),
