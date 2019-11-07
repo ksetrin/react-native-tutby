@@ -41,21 +41,17 @@ class FeedDetailsScreen extends React.Component {
     const pubDateReadable = moment(new Date(pubDate)).format('D MMMM HH:mm');
     return (
       <>
-        <View style={{marginBottom: 16}}>
-          <Text style={{fontSize: 23, fontWeight: '700'}}>{title}</Text>
+        <View style={styles.headerLineContainer}>
+          <Text style={styles.titleText}>{title}</Text>
         </View>
-        <View style={{marginBottom: 16}}>
-          <Text style={{fontSize: 11, color: '#808080'}}>
-            {pubDateReadable}
-          </Text>
+        <View style={styles.headerLineContainer}>
+          <Text style={styles.dateText}>{pubDateReadable}</Text>
         </View>
-        <View style={{marginBottom: 16}}>
-          <FastImage style={{width: '100%', height: 200}} source={{uri: img}} />
+        <View style={styles.headerLineContainer}>
+          <FastImage style={styles.headerImage} source={{uri: img}} />
         </View>
-        <View style={{marginBottom: 16}}>
-          <Text style={{fontSize: 16, fontWeight: '500'}}>
-            {clearDescription}
-          </Text>
+        <View style={styles.headerLineContainer}>
+          <Text style={styles.headerDescription}>{clearDescription}</Text>
         </View>
       </>
     );
@@ -69,18 +65,16 @@ class FeedDetailsScreen extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
+          contentContainerStyle={styles.contentContainer}
           ListHeaderComponent={this.renderHeaderContent}
           nestedScrollEnabled={true}
           data={media}
           renderItem={({item, index}) => (
-            <View style={{flex: 1, flexDirection: 'column', margin: 1}}>
+            <View style={styles.itemImageContainer}>
               <TouchableOpacity
                 onPress={this.showImagesModal(index)}
-                style={{flex: 1}}>
-                <FastImage
-                  style={{height: 120, width: '100%'}}
-                  source={{uri: item.url}}
-                />
+                style={styles.itemImageTouchable}>
+                <FastImage style={styles.image} source={{uri: item.url}} />
               </TouchableOpacity>
             </View>
           )}

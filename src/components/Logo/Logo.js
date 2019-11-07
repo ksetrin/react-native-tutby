@@ -8,14 +8,14 @@ import {connect} from 'react-redux';
 const Logo = ({image, title}) => {
   return (
     <View style={styles.container}>
-      <View style={{backgroundColor: '#ce1b17', padding: 3}}>
-        <Text style={{color: '#fff', fontWeight: '600'}}>
+      <View style={styles.logoTitle}>
+        <Text style={styles.logoText}>
           {title && title.substring(8).toUpperCase()}
         </Text>
       </View>
-      <View style={{flex: 1, height: 25}}>
+      <View style={styles.logoImageContainer}>
         <FastImage
-          style={{height: '100%'}}
+          style={styles.logoImage}
           resizeMode={FastImage.resizeMode.center}
           source={{uri: image, priority: FastImage.priority.high}}
         />

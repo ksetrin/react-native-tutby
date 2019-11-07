@@ -12,12 +12,12 @@ const AboutScreen = () => {
     <SafeAreaView style={styles.centerContainer}>
       <Text>Об авторе</Text>
       <Text>Петр Евсиков</Text>
-      <View style={{margin: 16}}>
+      <View style={styles.imageContainer}>
         <FastImage
           source={{
             uri: 'https://avatars2.githubusercontent.com/u/675318?s=460&v=4',
           }}
-          style={{width: 150, height: 150}}
+          style={styles.image}
         />
       </View>
     </SafeAreaView>

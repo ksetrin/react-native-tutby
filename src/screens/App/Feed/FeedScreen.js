@@ -22,15 +22,15 @@ const FeedScreen = ({title, rssNewsSectionList, onNewsPress}) => {
 
     return (
       <TouchableOpacity onPress={onNewsPress(guid)}>
-        <View style={{flexDirection: 'row'}}>
-          <View style={{}}>
-            <FastImage style={{width: 150, height: 100}} source={{uri: img}} />
+        <View style={styles.row}>
+          <View>
+            <FastImage style={styles.itemImage} source={{uri: img}} />
           </View>
-          <View style={{flex: 1, marginLeft: 8}}>
-            <View style={{marginBottom: 8}}>
+          <View style={styles.titleContainer}>
+            <View style={styles.titleTimeMargin}>
               <Text style={styles.timeText}>{time}</Text>
             </View>
-            <Text style={styles.paymentText}>{newsTitle}</Text>
+            <Text style={styles.titletText}>{newsTitle}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -54,7 +54,7 @@ const FeedScreen = ({title, rssNewsSectionList, onNewsPress}) => {
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
-        contentContainerStyle={{backgroundColor: '#fff', padding: 8}}
+        contentContainerStyle={styles.contentContainer}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         sections={rssNewsSectionList}
