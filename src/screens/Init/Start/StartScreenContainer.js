@@ -1,8 +1,8 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {rssFetchRequest} from '../../store/actions';
-import {rssRequestStateSelector} from '../../store/rss/selectors';
+import {rssFetchRequest} from '../../../store/actions';
+import {rssRequestStateSelector} from '../../../store/rss/selectors';
 import StartScreen from './StartScreen';
 import NetInfo from '@react-native-community/netinfo';
 

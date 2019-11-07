@@ -1,14 +1,14 @@
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import AppDrawerNavigator from './lib/AppDrawerNavigator';
-import LoginStackNavigator from './lib/LoginStackNavigator';
+import InitStackNavigator from './Init/InitStackNavigator';
+import AppDrawerNavigator from './App/AppDrawerNavigator';
 
 const RootNavigator = createSwitchNavigator(
   {
-    Login: LoginStackNavigator,
+    Init: InitStackNavigator,
     App: AppDrawerNavigator,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Init',
   },
 );
 

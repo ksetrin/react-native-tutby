@@ -8,8 +8,8 @@ export const RSS_FETCH_REQUEST_FAILURE = 'rss/fetch/request/failure';
 export const rssFetchRequest = () => async dispatch => {
   dispatch({type: RSS_FETCH_REQUEST_PENDING});
   try {
-    const response = await fetch('https://news.tut.by/rss/sport/football.rss');
-    // const response = await fetch('https://news.tut.by/rss/all.rss'); // todo move to config
+    // const response = await fetch('https://news.tut.by/rss/sport/football.rss');
+    const response = await fetch('https://news.tut.by/rss/all.rss'); // todo move to config
     const text = await response.text();
     const json = xmlToJson(text);
 

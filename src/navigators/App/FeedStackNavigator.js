@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
-import {FeedScreen} from '../../screens';
+import {FeedScreen, FeedDetailsScreen} from '../../screens';
 import Logo from '../../components/Logo';
 import Header from '../../components/Header';
 
@@ -8,6 +8,9 @@ const FeedStackNavigator = createStackNavigator(
   {
     Feed: {
       screen: FeedScreen,
+    },
+    FeedDetails: {
+      screen: FeedDetailsScreen,
     },
   },
   {

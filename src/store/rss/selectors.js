@@ -38,6 +38,7 @@ export const rssNewsSectionListSelector = () =>
         title: null,
         data: [],
       };
+      // We have the agreement all news item sorted by pubDate that's why I can go array of news one by one
       for (let i = 0; i < newsList.length; i++) {
         const pubDate = moment(new Date(newsList[i].pubDate)).format('D MMMM');
         if (section.title !== pubDate) {
@@ -51,6 +52,12 @@ export const rssNewsSectionListSelector = () =>
       sectionNews.push({...section});
       return sectionNews;
     },
+  );
+
+export const rssNewsListItemByGuidSelector = guid =>
+  createSelector(
+    rssNewsListSelector(),
+    newsList => newsList.find(item => item.guid[0]._ === guid),
   );
 
 export const rssRequestStateSelector = () =>

@@ -1,2 +1,3 @@
-export {default as FeedScreen} from './Feed/FeedScreenContainer';
-export {default as StartScreen} from './Start/StartScreenContainer';
+export {default as FeedScreen} from './App/Feed/FeedScreenContainer';
+export {default as FeedDetailsScreen} from './App/FeedDetails/FeedDetailsScreenContainer';
+export {default as StartScreen} from './Init/Start/StartScreenContainer';

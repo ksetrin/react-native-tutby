@@ -6,12 +6,11 @@ import {rssImageSelector, rssTitleSelector} from '../../store/rss/selectors';
 import {connect} from 'react-redux';
 
 const Logo = ({image, title}) => {
-  console.log('+kse---image', image);
   return (
     <View style={styles.container}>
       <View style={{backgroundColor: '#ce1b17', padding: 3}}>
         <Text style={{color: '#fff', fontWeight: '600'}}>
-          {title.toUpperCase()}
+          {title && title.substring(8).toUpperCase()}
         </Text>
       </View>
       <View style={{flex: 1}}>
@@ -36,6 +35,7 @@ function mapDispatchToProps(dispatch) {
   return {};
 }
 
+// Yes, this component has connect to store,  but it's not typically. In most case it's just a component with static asset
 export default connect(
   mapStateToProps,
   mapDispatchToProps,

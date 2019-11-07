@@ -1,7 +1,7 @@
 import {createStackNavigator} from 'react-navigation-stack';
 import {StartScreen} from '../../screens';
 
-const LoginStackNavigator = createStackNavigator(
+const InitStackNavigator = createStackNavigator(
   {
     Start: {
       screen: StartScreen,
@@ -15,4 +15,4 @@ const LoginStackNavigator = createStackNavigator(
   },
 );
 
-export default LoginStackNavigator;
+export default InitStackNavigator;
