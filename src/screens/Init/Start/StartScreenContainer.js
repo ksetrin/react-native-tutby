@@ -11,11 +11,16 @@ class StartScreenContainer extends React.Component {
     this.loadData();
   };
 
+  state = {
+    error: null,
+  };
+
   loadData = async () => {
     const {navigation, rssFetchRequest} = this.props;
+    this.setState({error: null});
     try {
       const connectionInfo = await NetInfo.fetch();
-      if (connectionInfo.type === 'none') {
+      if (!connectionInfo.isConnected) {
         throw new Error('You seem to be offline');
       } else {
         await rssFetchRequest();
@@ -23,7 +28,7 @@ class StartScreenContainer extends React.Component {
       this.checkLoadData();
       navigation.navigate('Feed');
     } catch (e) {
-      alert(e.message);
+      this.setState({error: e.message});
     }
   };
 
@@ -35,7 +40,14 @@ class StartScreenContainer extends React.Component {
   };
 
   render() {
-    return <StartScreen />;
+    const {rssFetchRequestState} = this.props;
+    return (
+      <StartScreen
+        isLoading={rssFetchRequestState.isLoading}
+        error={this.state.error}
+        onTryAgainPress={this.loadData}
+      />
+    );
   }
 }
 

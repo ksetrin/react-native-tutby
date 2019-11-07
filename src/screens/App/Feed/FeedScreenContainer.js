@@ -3,7 +3,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {rssFetchRequest} from '../../../store/actions';
 import {
-  rssRequestStateSelector,
   rssTitleSelector,
   rssNewsSectionListSelector,
 } from '../../../store/rss/selectors';
@@ -17,12 +16,11 @@ class FeedScreenContainer extends React.Component {
   };
 
   render() {
-    const {rssNewsSectionList, rssFetchRequestState, rssTitle} = this.props;
+    const {rssNewsSectionList, rssTitle} = this.props;
     return (
       <FeedScreen
         title={rssTitle}
         rssNewsSectionList={rssNewsSectionList}
-        rssFetchRequestState={rssFetchRequestState}
         onNewsPress={this.handleNewsPress}
       />
     );
@@ -32,7 +30,6 @@ class FeedScreenContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     rssNewsSectionList: rssNewsSectionListSelector()(state),
-    rssFetchRequestState: rssRequestStateSelector()(state),
     rssTitle: rssTitleSelector()(state),
   };
 }

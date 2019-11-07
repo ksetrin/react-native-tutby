@@ -12,12 +12,7 @@ import moment from 'moment';
 import 'moment/locale/ru';
 import styles from './FeedScreenStyles';
 
-const FeedScreen = ({
-  title,
-  rssNewsSectionList,
-  rssFetchRequestState,
-  onNewsPress,
-}) => {
+const FeedScreen = ({title, rssNewsSectionList, onNewsPress}) => {
   const renderItem = ({item}) => {
     const pubDate = moment(new Date(item.pubDate));
     const time = pubDate.format('HH:mm');
@@ -48,12 +43,6 @@ const FeedScreen = ({
     </View>
   );
 
-  const renderError = () => (
-    <View style={styles.centerContainer}>
-      <Text style={styles.red}>{rssFetchRequestState.errorMessage}</Text>
-    </View>
-  );
-
   const renderSeparatorComponent = () => <View style={styles.newsSeparator} />;
 
   const renderHeaderComponent = () => (
@@ -62,8 +51,8 @@ const FeedScreen = ({
     </View>
   );
 
-  const renderContent = () => (
-    <React.Fragment>
+  return (
+    <SafeAreaView style={styles.container}>
       <SectionList
         contentContainerStyle={{backgroundColor: '#fff', padding: 8}}
         renderItem={renderItem}
@@ -72,21 +61,8 @@ const FeedScreen = ({
         keyExtractor={item => item.guid[0]._}
         ItemSeparatorComponent={renderSeparatorComponent}
         ListHeaderComponent={renderHeaderComponent}
-        // onRefresh
+        // onRefresh not implemented
       />
-    </React.Fragment>
-  );
-
-  return (
-    <SafeAreaView style={styles.container}>
-      {rssFetchRequestState.isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : rssFetchRequestState.isSuccess &&
-        !rssFetchRequestState.errorMessage ? (
-        renderContent()
-      ) : (
-        renderError()
-      )}
     </SafeAreaView>
   );
 };
