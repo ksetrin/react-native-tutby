@@ -1,19 +1,16 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
-import {FeedScreen, FeedDetailsScreen} from '../../screens';
+import {AboutScreen} from '../../screens';
 import {defaultNavigationOptions} from '../../utils/navigation';
 
 const FeedStackNavigator = createStackNavigator(
   {
-    Feed: {
-      screen: FeedScreen,
-    },
-    FeedDetails: {
-      screen: FeedDetailsScreen,
+    About: {
+      screen: AboutScreen,
     },
   },
   {
-    initialRouteName: 'Feed',
+    initialRouteName: 'About',
     defaultNavigationOptions: ({navigation}) =>
       defaultNavigationOptions(navigation),
   },

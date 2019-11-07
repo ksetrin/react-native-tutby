@@ -1,5 +1,6 @@
 import {createDrawerNavigator} from 'react-navigation-drawer';
-import FeedStackNavigator from './FeedStackNavigator'
+import AboutStackNavigator from './AboutStackNavigator';
+import FeedStackNavigator from './FeedStackNavigator';
 
 const AppDrawerNavigator = createDrawerNavigator(
   {
@@ -7,6 +8,12 @@ const AppDrawerNavigator = createDrawerNavigator(
       screen: FeedStackNavigator,
       navigationOptions: {
         title: 'Новости',
+      },
+    },
+    AboutStack: {
+      screen: AboutStackNavigator,
+      navigationOptions: {
+        title: 'Об авторе',
       },
     },
   },
