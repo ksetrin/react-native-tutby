@@ -13,7 +13,7 @@ const Logo = ({image, title}) => {
           {title && title.substring(8).toUpperCase()}
         </Text>
       </View>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, height: 25}}>
         <FastImage
           style={{height: '100%'}}
           resizeMode={FastImage.resizeMode.center}
@@ -31,12 +31,5 @@ function mapStateToProps(state, props) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-
 // Yes, this component has connect to store,  but it's not typically. In most case it's just a component with static asset
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Logo);
+export default connect(mapStateToProps)(Logo);

@@ -1,11 +1,18 @@
 import React from 'react';
-import { ActivityIndicator, Modal } from 'react-native';
+import {ActivityIndicator, Modal} from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 
-const ImagesModal = ({showImage = false, images = [], actionClose = null}) => (
+// I know about warnings and I asked the author to update npm, the warnings already fixed in repo
+const ImagesModal = ({
+  showImage = false,
+  images = [],
+  index = 0,
+  actionClose = null,
+}) => (
   <Modal visible={showImage} transparent onRequestClose={actionClose}>
     <ImageViewer
       imageUrls={images}
+      index={index}
       enableSwipeDown
       enableImageZoom
       enablePreload

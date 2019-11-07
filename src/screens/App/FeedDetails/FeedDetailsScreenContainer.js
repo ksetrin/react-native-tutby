@@ -4,24 +4,14 @@ import {rssNewsListItemByGuidSelector} from '../../../store/rss/selectors';
 import FeedDetailsScreen from './FeedDetailsScreen';
 
 class FeedDetailsScreenContainer extends React.Component {
-  handleNewsPress = () => () => {
-    alert('hi');
-  };
-
   render() {
     const {rssNewsListItem} = this.props;
-    return (
-      <FeedDetailsScreen
-        rssNewsListItem={rssNewsListItem}
-        onNewsPress={this.handleNewsPress}
-      />
-    );
+    return <FeedDetailsScreen rssNewsListItem={rssNewsListItem} />;
   }
 }
 
 function mapStateToProps(state, props) {
   const guid = props.navigation.getParam('guid');
-  console.log('+kse-guid', guid);
   return {
     rssNewsListItem: rssNewsListItemByGuidSelector(guid)(state),
   };
