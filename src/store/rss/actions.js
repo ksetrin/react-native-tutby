@@ -12,7 +12,7 @@ export const rssFetchRequest = () => async dispatch => {
     const response = await fetch('https://news.tut.by/rss/all.rss'); // todo move to config
     const text = await response.text();
     const json = xmlToJson(text);
-
+    console.log('+kse-json', json);
     dispatch({
       type: RSS_FETCH_REQUEST_SUCCESS,
       title: json.title,
